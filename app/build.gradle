@@ -1,15 +1,20 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 repositories {
     maven { url  "http://dl.bintray.com/dasar/maven" }
     maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 
 android {
     compileSdkVersion project.sdkVersion
     defaultConfig {
+
+        testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
         applicationId "org.horaapps.leafpic"
         minSdkVersion 19
         targetSdkVersion project.sdkVersion
@@ -93,11 +98,11 @@ dependencies {
 
     // utils
     implementation 'com.github.bumptech.glide:glide:4.7.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    kapt 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
     implementation 'com.github.Commit451:bypasses:1.1.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
     implementation "com.orhanobut:hawk:2.0.1"
     implementation 'com.commonsware.cwac:provider:0.4.3'
@@ -136,6 +141,17 @@ dependencies {
     // TODO check them out
     implementation 'com.turingtechnologies.materialscrollbar:lib:10.0.3'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
+
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 Properties props = new Properties()
